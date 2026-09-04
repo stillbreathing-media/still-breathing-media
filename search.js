@@ -4,6 +4,7 @@ const SB_SEARCH_INDEX = [
   { title: "Watch our stories", desc: "Cinematic short films", url: "index.html#watch" },
   { title: "Books", desc: "All Still Breathing books", url: "books.html" },
   { title: "The Note In His Pocket", desc: "Book — read Chapter 1 free", url: "note-in-his-pocket.html" },
+  { title: "Still Breathing: My Story", desc: "True story by Sumeyi Rogers — read Chapter 1 free", url: "still-breathing-my-story.html" },
   { title: "She Stopped Waiting for Permission", desc: "Book — coming soon", url: "books.html" },
   { title: "She Raised Him Alone", desc: "Book — coming soon", url: "books.html" },
   { title: "He Came Back With A Wife", desc: "Book — coming soon", url: "books.html" },
