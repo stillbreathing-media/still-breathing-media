@@ -252,17 +252,18 @@
     <div class="sanctuary-text">
       <h2>The Sanctuary Wall</h2>
       <p>Some things are too heavy to say out loud. Leave it here, anonymously. It will be read, and it will be prayed over — even if no one ever knows it was you.</p>
-      <div class="note">This form is a working preview. To go live, it needs to connect to a moderated inbox (a form service or database) so submissions actually reach your team — nothing typed here is sent or stored yet.</div>
+      <div class="note">Almost live — once the form is connected to Formspree, submissions will land straight in your inbox, moderated before anything's shared.</div>
     </div>
     <div>
-      <form class="wall-form" id="wallForm">
-        <select id="wallTag">
-          <option value="burden">Something I'm carrying</option>
-          <option value="prayer">A prayer request</option>
-          <option value="gratitude">Something I'm grateful for</option>
-          <option value="question">A question I'm sitting with</option>
+      <form class="wall-form" id="wallForm" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+        <input type="hidden" name="_subject" value="New Sanctuary Wall submission">
+        <select id="wallTag" name="type">
+          <option value="Something they're carrying">Something I'm carrying</option>
+          <option value="A prayer request">A prayer request</option>
+          <option value="Something they're grateful for">Something I'm grateful for</option>
+          <option value="A question they're sitting with">A question I'm sitting with</option>
         </select>
-        <textarea id="wallText" placeholder="Say as much or as little as you need to."></textarea>
+        <textarea id="wallText" name="message" placeholder="Say as much or as little as you need to." required></textarea>
         <div class="row">
           <button type="submit" class="btn btn-solid">Leave it here</button>
           <span class="wall-status" id="wallStatus"></span>
@@ -371,13 +372,13 @@
         <h3>Daily Resilience Devotional</h3>
         <div class="price">$5/mo</div>
         <p class="desc">A short reading and reflection in your inbox each morning — five minutes to remember you're not alone in this.</p>
-        <a class="btn btn-ghost" href="mailto:hello@stillbreathingmedia.com?subject=Devotional">Start reading</a>
+        <a class="btn btn-ghost" style="opacity:0.55;pointer-events:none;">Coming soon</a>
       </div>
       <div class="res-card">
         <h3>Audio Encouragement Pack</h3>
         <div class="price">$7</div>
         <p class="desc">Ten short spoken pieces for the moments you can't read — for the drive, the sleepless night, the hard morning.</p>
-        <a class="btn btn-ghost" href="mailto:hello@stillbreathingmedia.com?subject=Audio Pack">Listen in</a>
+        <a class="btn btn-ghost" style="opacity:0.55;pointer-events:none;">Coming soon</a>
       </div>
     </div>
   </div>
@@ -396,7 +397,7 @@
         <li>Early access to new stories</li>
         <li>Name in the credits</li>
       </ul>
-      <a class="btn btn-ghost" href="mailto:hello@stillbreathingmedia.com?subject=Membership - Still Here">Join</a>
+      <a class="btn btn-ghost" style="opacity:0.55;pointer-events:none;">Coming soon</a>
     </div>
     <div class="tier featured">
       <div class="name">Still Breathing Circle</div>
@@ -406,7 +407,7 @@
         <li>Behind-the-scenes on every film</li>
         <li>Monthly members-only devotional</li>
       </ul>
-      <a class="btn btn-solid" href="mailto:hello@stillbreathingmedia.com?subject=Membership - Circle">Join</a>
+      <a class="btn btn-solid" style="opacity:0.55;pointer-events:none;">Coming soon</a>
     </div>
     <div class="tier">
       <div class="name">Fund a Story</div>
@@ -415,7 +416,7 @@
         <li>Directly funds one film's production</li>
         <li>A thank-you note from the team</li>
       </ul>
-      <a class="btn btn-ghost" href="mailto:hello@stillbreathingmedia.com?subject=Donation">Give</a>
+      <a class="btn btn-ghost" style="opacity:0.55;pointer-events:none;">Coming soon</a>
     </div>
   </div>
 </section>
@@ -449,7 +450,6 @@
   const form = document.getElementById('wallForm');
   const status = document.getElementById('wallStatus');
   const list = document.getElementById('wallList');
-  const tagLabels = { burden:"Something they're carrying", prayer:"A prayer request", gratitude:"Something they're grateful for", question:"A question they're sitting with" };
 
   form.addEventListener('submit', function(e){
     e.preventDefault();
@@ -459,12 +459,30 @@
 
     const item = document.createElement('div');
     item.className = 'wall-item';
-    item.innerHTML = '<span class="tag">' + tagLabels[tag] + '</span>' + text.replace(/</g,'&lt;');
+    item.innerHTML = '<span class="tag">' + tag + '</span>' + text.replace(/</g,'&lt;');
     list.prepend(item);
 
-    document.getElementById('wallText').value = '';
-    status.textContent = "Received, in this preview only — connect a backend to make this real.";
-    setTimeout(()=> status.textContent = '', 4000);
+    const placeholder = form.action.includes('YOUR_FORM_ID');
+    if(placeholder){
+      document.getElementById('wallText').value = '';
+      status.textContent = "Received, in this preview only — connect Formspree to make this real.";
+      setTimeout(()=> status.textContent = '', 4000);
+      return;
+    }
+
+    status.textContent = "Sending...";
+    fetch(form.action, {
+      method: 'POST',
+      body: new FormData(form),
+      headers: { 'Accept': 'application/json' }
+    }).then(res => {
+      if(res.ok){
+        document.getElementById('wallText').value = '';
+        status.textContent = "Received. Thank you for trusting us with this.";
+      } else {
+        status.textContent = "Something went wrong — please try again.";
+      }
+    }).catch(() => { status.textContent = "Something went wrong — please try again."; });
   });
 </script>
 
