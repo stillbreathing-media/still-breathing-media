@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Connect | Still Breathing Media</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;1,400&family=Work+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/styles.css">
+</head>
+<body>
+
+<nav>
+  <div class="wrap" style="display:flex;align-items:center;justify-content:space-between;">
+    <a href="index.html" class="brand"><img src="assets/logo.png" alt="Still Breathing" style="height:34px;width:auto;"> Still Breathing</a>
+    <div style="display:flex;align-items:center;gap:26px;">
+      <div class="navlinks">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="books.html">Books</a>
+        <a href="prayers.html">Prayers</a>
+        <a href="connect.html" class="active">Connect</a>
+      </div>
+      <div class="search-wrap">
+        <button class="search-toggle" id="searchToggle" aria-label="Search">
+          <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        </button>
+        <div class="search-panel" id="searchPanel">
+          <input type="text" id="searchInput" placeholder="Search stories, prayers, books...">
+          <div class="search-results" id="searchResults"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<div class="page-hero">
+  <div class="wrap">
+    <p class="kicker">Reach out, or help us reach further</p>
+    <h1>Connect with Still Breathing</h1>
+  </div>
+</div>
+
+<section id="wall" class="sanctuary">
+  <div class="wrap sanctuary-inner">
+    <div class="sanctuary-text">
+      <h2>The Sanctuary Wall</h2>
+      <p>Some things are too heavy to say out loud. Leave it here, anonymously. It will be read, and it will be prayed over — even if no one ever knows it was you.</p>
+    </div>
+    <div>
+      <form class="wall-form" id="wallForm" action="https://formspree.io/f/xaeybovq" method="POST">
+        <input type="hidden" name="_subject" value="New Sanctuary Wall submission">
+        <select id="wallTag" name="type">
+          <option value="Something they're carrying">Something I'm carrying</option>
+          <option value="A prayer request">A prayer request</option>
+          <option value="Something they're grateful for">Something I'm grateful for</option>
+          <option value="A question they're sitting with">A question I'm sitting with</option>
+        </select>
+        <textarea id="wallText" name="message" placeholder="Say as much or as little as you need to." required></textarea>
+        <div class="row">
+          <button type="submit" class="btn btn-solid">Leave it here</button>
+          <span class="wall-status" id="wallStatus"></span>
+        </div>
+      </form>
+      <div class="wall-list" id="wallList"></div>
+    </div>
+  </div>
+</section>
+
+<section id="support" class="support">
+  <div class="wrap support-inner">
+    <h2>Help this reach further</h2>
+    <p>Every member funds two things: another story getting made, and a step closer to real outreach — counselors, mentors, and people on the ground for those who need more than a video.</p>
+  </div>
+  <div class="wrap" style="margin-top:20px;">
+    <div class="res-card" style="max-width:400px;margin:0 auto;">
+      <h3>The Still Breathing Journal</h3>
+      <div class="price">$9</div>
+      <p class="desc">A guided 30-day digital workbook for processing grief, doubt, and emotional pain.</p>
+      <a class="btn btn-solid" href="https://stephenrogar.gumroad.com/l/rociy" target="_blank" rel="noopener">Get the journal</a>
+    </div>
+  </div>
+  <div class="wrap tier-row">
+    <div class="tier">
+      <div class="name">Still Here</div>
+      <div class="amt">$5/mo</div>
+      <ul><li>Early access to new stories</li><li>Name in the credits</li></ul>
+      <a class="btn btn-ghost" style="opacity:0.55;pointer-events:none;">Coming soon</a>
+    </div>
+    <div class="tier featured">
+      <div class="name">Still Breathing Circle</div>
+      <div class="amt">$15/mo</div>
+      <ul><li>Everything in Still Here</li><li>Behind-the-scenes on every film</li><li>Monthly members-only devotional</li></ul>
+      <a class="btn btn-solid" style="opacity:0.55;pointer-events:none;">Coming soon</a>
+    </div>
+    <div class="tier">
+      <div class="name">Fund a Story</div>
+      <div class="amt">One-time gift</div>
+      <ul><li>Directly funds one film's production</li><li>A thank-you note from the team</li></ul>
+      <a class="btn btn-ghost" style="opacity:0.55;pointer-events:none;">Coming soon</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap foot-inner">
+    <div class="foot-brand">
+      <a href="index.html" class="brand"><img src="assets/logo.png" alt="Still Breathing" style="height:30px;width:auto;"> Still Breathing</a>
+      <p>Faith meets life. Doubt meets hope. Pain meets purpose. If you're still breathing, your story isn't over.</p>
+    </div>
+    <div class="foot-links">
+      <div class="foot-col">
+        <h4>Explore</h4>
+        <a href="about.html">About</a>
+        <a href="books.html">Books</a>
+        <a href="prayers.html">Prayers</a>
+        <a href="connect.html">Connect</a>
+      </div>
+      <div class="foot-col">
+        <h4>Elsewhere</h4>
+        <a href="https://www.youtube.com/@StillBreathing-Media" target="_blank" rel="noopener">YouTube</a>
+        <a href="https://tiktok.com/@stillbreathing510" target="_blank" rel="noopener">TikTok</a>
+        <a href="privacy.html">Privacy Policy</a>
+      </div>
+    </div>
+  </div>
+  <div class="wrap foot-bottom">© 2026 Still Breathing Media. You are never alone. God is still here.</div>
+</footer>
+
+<script src="assets/search.js"></script>
+<script>
+  const form = document.getElementById('wallForm');
+  const status = document.getElementById('wallStatus');
+  const list = document.getElementById('wallList');
+
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    const text = document.getElementById('wallText').value.trim();
+    const tag = document.getElementById('wallTag').value;
+    if(!text){ status.textContent = "Write something first."; return; }
+
+    status.textContent = "Sending...";
+    fetch(form.action, {
+      method: 'POST',
+      body: new FormData(form),
+      headers: { 'Accept': 'application/json' }
+    }).then(res => {
+      if(res.ok){
+        const item = document.createElement('div');
+        item.className = 'wall-item';
+        item.innerHTML = '<span class="tag">' + tag + '</span>' + text.replace(/</g,'&lt;');
+        list.prepend(item);
+        document.getElementById('wallText').value = '';
+        status.textContent = "Received. Thank you for trusting us with this.";
+      } else {
+        status.textContent = "Something went wrong — please try again.";
+      }
+    }).catch(() => { status.textContent = "Something went wrong — please try again."; });
+  });
+</script>
+
+</body>
+</html>
