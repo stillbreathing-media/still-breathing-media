@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Prayers | Still Breathing Media</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;1,400&family=Work+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<style>
+  .prayer-block{ padding: 44px 0; border-bottom: 1px solid var(--line); scroll-margin-top: 90px; }
+  .prayer-block h2{ font-family:'Lora',serif; color:var(--gold); font-size:1.35rem; margin-bottom:16px; }
+  .prayer-block p{ color:#EDE3D3; font-size:1.05rem; line-height:1.8; max-width: 620px; }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap" style="display:flex;align-items:center;justify-content:space-between;">
+    <a href="index.html" class="brand"><img src="logo.png" alt="Still Breathing" style="height:34px;width:auto;"> Still Breathing</a>
+    <div style="display:flex;align-items:center;gap:26px;">
+      <div class="navlinks">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="books.html">Books</a>
+        <a href="prayers.html" class="active">Prayers</a>
+        <a href="connect.html">Connect</a>
+      </div>
+      <div class="search-wrap">
+        <button class="search-toggle" id="searchToggle" aria-label="Search">
+          <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        </button>
+        <div class="search-panel" id="searchPanel">
+          <input type="text" id="searchInput" placeholder="Search stories, prayers, books...">
+          <div class="search-results" id="searchResults"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<div class="page-hero">
+  <div class="wrap">
+    <p class="kicker">Always free</p>
+    <h1>Prayers for whatever hour you're in</h1>
+    <p>No cost, no login. Whatever you're carrying — these are yours.</p>
+  </div>
+</div>
+
+<div class="wrap">
+  <div class="prayer-block" id="am3">
+    <h2>The 3:00 AM Prayer</h2>
+    <p>Lord, it's that hour again. The house is quiet, everyone else is asleep, and I'm lying here with my eyes open and my chest tight, running the same thought in circles like it might land somewhere different this time. Maybe I'm crying right now and trying to do it quietly. Maybe I'm just staring at the ceiling, too tired to cry and too awake to rest. Either way, You're not asleep either. You never have been.</p>
+    <p>I don't fully understand why the dark makes everything feel heavier than it did in daylight — why the bill, the diagnosis, the fight, the silence from someone I love, all of it gets louder at this hour. But You made the night too, and You never once called it a place You couldn't reach me. So reach me now. Slow my heart down. Loosen whatever is sitting on my chest. I'm not asking You to solve it before sunrise — I'm asking You to sit here in the dark with me until I can finally close my eyes. Amen.</p>
+  </div>
+  <div class="prayer-block" id="hope">
+    <h2>For Lost Hope</h2>
+    <p>God, I used to know what hope felt like — that lightness, that sense that something good was still coming. I don't feel that anymore. What I have left is thinner than that: just enough to get up, just enough to keep going through the motions, and some days not even that. I'm tired of hoping and having it cost me nothing but disappointment.</p>
+    <p>I'm not going to pretend to You that I feel more than I do. You already know. So I'm bringing You what's actually left — the scraps, the doubt, the part of me that wants to believe but is scared to. Do something with it. I'm not asking for excitement or certainty. I'm asking You to keep the smallest ember of hope alive in me until I can feel it again, even if I can't feel it tonight. Amen.</p>
+  </div>
+  <div class="prayer-block" id="job">
+    <h2>For a Job, Provision</h2>
+    <p>Father, You see the account balance I keep refreshing like it might change on its own. You see the applications I've sent that nobody answered, the interviews that went nowhere, the quiet shame of not being able to provide the way I want to. I'm tired of the waiting room feeling of this season — always almost, never quite.</p>
+    <p>I'm not asking You for more than I need. I'm asking for a door — one door, the right one — to open where I can actually walk through it. Until then, give me the strength to keep showing up, keep applying, keep trying, without it hollowing me out. Keep worry from being louder in me than trust. Provide for me the way You've always provided, even when I couldn't see how it would happen. Amen.</p>
+  </div>
+  <div class="prayer-block" id="loved">
+    <h2>For a Loved One</h2>
+    <p>Lord, I bring the person on my heart before You right now — You already know who, and You already know what I'm afraid of for them. There's so much I can't fix, can't reach, can't protect them from, no matter how much I want to. I've prayed for them so many times I've lost count, and I'm not stopping now.</p>
+    <p>Cover them where I can't. Meet them in whatever room they're in tonight, whatever thought is keeping them up, whatever weight they're carrying that they haven't told me about. Give them exactly what they need, even if it isn't what I would have chosen for them. And if they feel alone right now, let them feel, somehow, that they aren't — that You're there, and that I haven't stopped bringing them to You. Amen.</p>
+  </div>
+  <div class="prayer-block" id="depression">
+    <h2>For Depression, Heaviness</h2>
+    <p>God, I'm tired in a way that sleep doesn't fix. Some mornings the hardest part of the whole day is just getting out of bed, and I've gotten so good at looking fine on the outside that I'm not even sure anyone would guess what today has actually felt like. I'm tired of performing okay. I'm tired of carrying this and calling it nothing.</p>
+    <p>I'm not asking You to lift it all tonight — I've asked before, and I know this doesn't move like that. I'm asking You to stay close to me inside it. Don't let this heaviness convince me it's the whole truth about who I am or what my life is. Remind me, even faintly, that this feeling is not the end of my story, and that You haven't turned away from me just because I can't feel You right now. Amen.</p>
+  </div>
+  <div class="prayer-block" id="forgotten">
+    <h2>For Feeling Forgotten</h2>
+    <p>Lord, it feels like the world kept moving and I got left in a part of the story nobody's reading anymore. People I thought would check on me didn't. Doors I thought would open, didn't. I watch everyone else's life keep going and wonder, quietly, if mine got put on pause and nobody told me.</p>
+    <p>I don't need to be first in line for everyone else. I need to know I'm not invisible to You. Remind me that You haven't looked away, that You're not too busy running the rest of the world to notice me in it. I want to believe that being forgotten by people isn't the same as being forgotten by You. Help that be true for me tonight. Amen.</p>
+  </div>
+  <div class="prayer-block" id="deliverance" style="border-bottom:none;">
+    <h2>Casting Off the Enemy</h2>
+    <p>In the name of Jesus, I refuse every voice tonight that's trying to convince me I'm too far gone, too broken, too tired, too much of a failure to be loved or used or forgiven. I know where those thoughts come from, and I know they don't get to sit at the table with me anymore.</p>
+    <p>Fear, you don't get the final word. Shame, you don't get to define me. Condemnation, you are not from God, and I am done listening to you like you are. I belong to God. I am still standing, still breathing, still His — not because I've earned it, but because He said so, and His word outlasts every lie that's been circling me tonight. In Jesus' name, Amen.</p>
+  </div>
+</div>
+
+<section class="sanctuary" style="border-top:1px solid var(--line);">
+  <div class="wrap" style="text-align:center;max-width:560px;">
+    <h2>Something heavier to carry?</h2>
+    <p style="color:var(--muted);margin-top:14px;">Leave it on the Sanctuary Wall, anonymously. It will be read, and prayed over.</p>
+    <a class="btn btn-solid" href="connect.html#wall" style="margin-top:24px;display:inline-block;">Visit the Sanctuary Wall</a>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap foot-inner">
+    <div class="foot-brand">
+      <a href="index.html" class="brand"><img src="logo.png" alt="Still Breathing" style="height:30px;width:auto;"> Still Breathing</a>
+      <p>Faith meets life. Doubt meets hope. Pain meets purpose. If you're still breathing, your story isn't over.</p>
+    </div>
+    <div class="foot-links">
+      <div class="foot-col">
+        <h4>Explore</h4>
+        <a href="about.html">About</a>
+        <a href="books.html">Books</a>
+        <a href="prayers.html">Prayers</a>
+        <a href="connect.html">Connect</a>
+      </div>
+      <div class="foot-col">
+        <h4>Elsewhere</h4>
+        <a href="https://www.youtube.com/@StillBreathing-Media" target="_blank" rel="noopener">YouTube</a>
+        <a href="https://tiktok.com/@stillbreathing510" target="_blank" rel="noopener">TikTok</a>
+        <a href="privacy.html">Privacy Policy</a>
+      </div>
+    </div>
+  </div>
+  <div class="wrap foot-bottom">© 2026 Still Breathing Media. You are never alone. God is still here.</div>
+</footer>
+
+<script src="search.js"></script>
+</body>
+</html>
