@@ -61,3 +61,17 @@ function sbInitSearch(){
   });
 }
 document.addEventListener('DOMContentLoaded', sbInitSearch);
+
+function sbInitMenu(){
+  const toggle = document.getElementById('menuToggle');
+  const panel = document.getElementById('menuPanel');
+  if(!toggle || !panel) return;
+  toggle.addEventListener('click', function(e){
+    e.stopPropagation();
+    panel.classList.toggle('open');
+  });
+  document.addEventListener('click', function(e){
+    if(!panel.contains(e.target) && e.target !== toggle && !toggle.contains(e.target)) panel.classList.remove('open');
+  });
+}
+document.addEventListener('DOMContentLoaded', sbInitMenu);

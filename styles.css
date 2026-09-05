@@ -167,6 +167,17 @@
 
 /* ---- shared page nav additions ---- */
 .navlinks a.active{ color: var(--gold); }
+.menu-wrap{ position: relative; }
+.menu-toggle{ background:none; border:none; color:var(--cream); cursor:pointer; padding:6px; display:flex; align-items:center; gap:8px; font-family:'Work Sans',sans-serif; font-size:0.92rem; }
+.menu-panel{
+  position: absolute; top: 46px; right: 0; width: 220px;
+  background: var(--ember-deep); border: 1px solid var(--line);
+  display: none; z-index: 60; flex-direction: column;
+}
+.menu-panel.open{ display:flex; }
+.menu-panel a{ padding: 13px 18px; font-size: 0.95rem; color: var(--cream); border-bottom: 1px solid var(--line); }
+.menu-panel a:last-child{ border-bottom:none; }
+.menu-panel a:hover, .menu-panel a.active{ color: var(--gold); background: rgba(232,163,61,0.06); }
 .search-wrap{ position: relative; }
 .search-toggle{ background:none; border:none; color:var(--cream); cursor:pointer; padding:6px; display:flex; align-items:center; }
 .search-panel{
