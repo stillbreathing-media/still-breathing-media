@@ -167,6 +167,10 @@
 
 /* ---- shared page nav additions ---- */
 .navlinks a.active{ color: var(--gold); }
+@media (max-width: 480px){
+  nav .brand{ font-size: 0.95rem; white-space: nowrap; }
+  nav .brand img{ height: 28px !important; }
+}
 .menu-wrap{ position: relative; }
 .menu-toggle{ background:none; border:none; color:var(--cream); cursor:pointer; padding:6px; display:flex; align-items:center; gap:8px; font-family:'Work Sans',sans-serif; font-size:0.92rem; }
 .menu-panel{
