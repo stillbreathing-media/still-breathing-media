@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Verses | Still Breathing Media</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;1,400&family=Work+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<style>
+  .verse-card{ border:1px solid var(--line); padding:36px 30px; text-align:center; max-width:640px; margin:0 auto; }
+  .verse-card .theme{ color:var(--gold); font-size:0.85rem; letter-spacing:0.08em; text-transform:uppercase; margin-bottom:16px; }
+  .verse-card .text{ font-family:'Lora',serif; font-style:italic; font-size:1.25rem; color:#EDE3D3; line-height:1.6; }
+  .verse-card .ref{ color:var(--gold); margin-top:16px; font-family:'Lora',serif; }
+  .lookup-box{ max-width:480px; margin:0 auto; }
+  .lookup-box input{ width:100%; background: rgba(242,233,221,0.05); border:1px solid var(--line); color:var(--cream); padding:14px 16px; font-size:0.98rem; border-radius:2px; margin-bottom:14px; }
+  .lookup-result{ margin-top:24px; min-height:20px; }
+  .theme-chip{ display:inline-block; padding:6px 14px; border:1px solid var(--line); border-radius:20px; font-size:0.82rem; color:var(--muted); margin:4px; cursor:pointer; }
+  .theme-chip:hover, .theme-chip.active{ border-color:var(--gold); color:var(--gold); }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap" style="display:flex;align-items:center;justify-content:space-between;">
+    <a href="index.html" class="brand"><img src="logo.png" alt="Still Breathing" style="height:34px;width:auto;"> Still Breathing</a>
+    <div style="display:flex;align-items:center;gap:26px;">
+      <div class="navlinks">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="books.html">Books</a>
+        <a href="prayers.html">Prayers</a>
+        <a href="verses.html" class="active">Verses</a>
+        <a href="breathing-room.html">Breathing Room</a>
+        <a href="connect.html">Connect</a>
+      </div>
+      <div class="search-wrap">
+        <button class="search-toggle" id="searchToggle" aria-label="Search">
+          <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        </button>
+        <div class="search-panel" id="searchPanel">
+          <input type="text" id="searchInput" placeholder="Search stories, prayers, books...">
+          <div class="search-results" id="searchResults"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<div class="page-hero">
+  <div class="wrap">
+    <p class="kicker">A word for today</p>
+    <h1>Verses</h1>
+    <p>A new theme every day — plus a place to look up any verse by name.</p>
+  </div>
+</div>
+
+<section>
+  <div class="wrap">
+    <div class="verse-card" id="votdCard">
+      <div class="theme" id="votdTheme">Loading...</div>
+      <div class="text" id="votdText"></div>
+      <div class="ref" id="votdRef"></div>
+    </div>
+  </div>
+</section>
+
+<section style="border-bottom:none;">
+  <div class="wrap lookup-box">
+    <div class="section-head" style="text-align:center;">
+      <h2>Look up a verse</h2>
+      <p>Type a reference like "John 3:16" or "Psalm 23".</p>
+    </div>
+    <input type="text" id="verseQuery" placeholder="e.g. Romans 8:28">
+    <div style="text-align:center;">
+      <button class="btn btn-solid" id="verseSearchBtn" type="button">Search</button>
+    </div>
+    <div class="lookup-result" id="lookupResult"></div>
+
+    <div style="text-align:center;margin-top:40px;">
+      <div style="color:var(--muted);font-size:0.85rem;margin-bottom:10px;">Or browse a theme:</div>
+      <span class="theme-chip" data-theme="inspiration">Inspiration</span>
+      <span class="theme-chip" data-theme="motivation">Motivation</span>
+      <span class="theme-chip" data-theme="work">Work</span>
+      <span class="theme-chip" data-theme="wealth">Wealth</span>
+      <span class="theme-chip" data-theme="love">Love</span>
+      <span class="theme-chip" data-theme="sacrifice">Sacrifice</span>
+      <span class="theme-chip" data-theme="hope">Hope</span>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap foot-inner">
+    <div class="foot-brand">
+      <a href="index.html" class="brand"><img src="logo.png" alt="Still Breathing" style="height:30px;width:auto;"> Still Breathing</a>
+      <p>Faith meets life. Doubt meets hope. Pain meets purpose. If you're still breathing, your story isn't over.</p>
+    </div>
+    <div class="foot-links">
+      <div class="foot-col">
+        <h4>Explore</h4>
+        <a href="about.html">About</a>
+        <a href="books.html">Books</a>
+        <a href="prayers.html">Prayers</a>
+        <a href="breathing-room.html">Breathing Room</a>
+      </div>
+      <div class="foot-col">
+        <h4>Elsewhere</h4>
+        <a href="https://www.youtube.com/@StillBreathing-Media" target="_blank" rel="noopener">YouTube</a>
+        <a href="https://tiktok.com/@stillbreathing510" target="_blank" rel="noopener">TikTok</a>
+        <a href="privacy.html">Privacy Policy</a>
+      </div>
+    </div>
+  </div>
+  <div class="wrap foot-bottom">© 2026 Still Breathing Media. You are never alone. God is still here.</div>
+</footer>
+
+<script src="search.js"></script>
+<script src="verses.js"></script>
+<script>
+  const { verse, theme } = sbVerseOfDay();
+  document.getElementById('votdTheme').textContent = "Today's theme: " + theme;
+  document.getElementById('votdText').textContent = '"' + verse.text + '"';
+  document.getElementById('votdRef').textContent = verse.ref;
+
+  document.getElementById('verseSearchBtn').addEventListener('click', doLookup);
+  document.getElementById('verseQuery').addEventListener('keydown', e => { if(e.key === 'Enter') doLookup(); });
+
+  async function doLookup(){
+    const q = document.getElementById('verseQuery').value;
+    const box = document.getElementById('lookupResult');
+    if(!q.trim()){ box.innerHTML = '<div style="color:var(--muted);">Type a reference first.</div>'; return; }
+    box.innerHTML = '<div style="color:var(--muted);">Searching...</div>';
+    const result = await sbLookupVerse(q);
+    if(result){
+      box.innerHTML = '<div class="verse-card"><div class="text">"' + result.text + '"</div><div class="ref">' + result.ref + '</div></div>';
+    } else {
+      box.innerHTML = '<div style="color:var(--muted);">Couldn\'t find that one — try a format like "John 3:16".</div>';
+    }
+  }
+
+  document.querySelectorAll('.theme-chip').forEach(chip => {
+    chip.addEventListener('click', () => {
+      document.querySelectorAll('.theme-chip').forEach(c => c.classList.remove('active'));
+      chip.classList.add('active');
+      const t = chip.dataset.theme;
+      const pool = SB_VERSES.filter(v => v.tags.includes(t));
+      const v = pool[Math.floor(Math.random()*pool.length)];
+      document.getElementById('lookupResult').innerHTML =
+        '<div class="verse-card"><div class="theme">' + t.toUpperCase() + '</div><div class="text">"' + v.text + '"</div><div class="ref">' + v.ref + '</div></div>';
+    });
+  });
+</script>
+</body>
+</html>

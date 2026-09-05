@@ -21,6 +21,7 @@
         <a href="about.html">About</a>
         <a href="books.html">Books</a>
         <a href="prayers.html">Prayers</a>
+        <a href="verses.html">Verses</a>
         <a href="breathing-room.html">Breathing Room</a>
         <a href="connect.html">Connect</a>
       </div>
@@ -46,6 +47,15 @@
       <a class="btn btn-solid" href="#watch">Watch a story</a>
       <a class="btn btn-ghost" href="connect.html#wall">Share what you're carrying</a>
     </div>
+  </div>
+</section>
+
+<section id="verse-of-day" style="border-bottom:1px solid var(--line);">
+  <div class="wrap" style="text-align:center;max-width:640px;">
+    <div style="color:var(--gold);font-size:0.85rem;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:14px;" id="votdTheme">Today's Verse</div>
+    <div style="font-family:'Lora',serif;font-style:italic;font-size:1.2rem;color:#EDE3D3;line-height:1.6;" id="votdText"></div>
+    <div style="color:var(--gold);margin-top:14px;font-family:'Lora',serif;" id="votdRef"></div>
+    <a href="verses.html" class="btn btn-ghost" style="margin-top:22px;display:inline-block;">Look up a verse</a>
   </div>
 </section>
 
@@ -158,6 +168,7 @@
         <a href="about.html">About</a>
         <a href="books.html">Books</a>
         <a href="prayers.html">Prayers</a>
+        <a href="verses.html">Verses</a>
         <a href="breathing-room.html">Breathing Room</a>
         <a href="connect.html">Connect</a>
       </div>
@@ -172,7 +183,14 @@
   <div class="wrap foot-bottom">© 2026 Still Breathing Media. You are never alone. God is still here.</div>
 </footer>
 
+<script src="verses.js"></script>
 <script src="search.js"></script>
+<script>
+  const votd = sbVerseOfDay();
+  document.getElementById('votdTheme').textContent = "Today's theme: " + votd.theme;
+  document.getElementById('votdText').textContent = '"' + votd.verse.text + '"';
+  document.getElementById('votdRef').textContent = votd.verse.ref;
+</script>
 <script>
   const track = document.getElementById('carouselTrack');
   const dotsWrap = document.getElementById('carouselDots');
