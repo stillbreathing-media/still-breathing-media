@@ -67,6 +67,7 @@
       <div class="theme" id="votdTheme">Loading...</div>
       <div class="text" id="votdText"></div>
       <div class="ref" id="votdRef"></div>
+      <button data-share data-share-title="Today's verse from Still Breathing" id="votdShareBtn" style="margin-top:16px;background:none;border:1px solid var(--line);color:var(--muted);padding:8px 16px;border-radius:20px;font-size:0.82rem;cursor:pointer;">&#8599; Share today's verse</button>
     </div>
   </div>
 </section>
@@ -105,9 +106,9 @@
     <div style="text-align:center;margin-bottom:24px;">
       <span class="theme-chip bible-chip" data-story="cain">Cain &amp; Abel</span>
       <span class="theme-chip bible-chip" data-story="joseph">Joseph &amp; His Brothers</span>
-      <span class="theme-chip" style="opacity:0.5;cursor:default;">David &amp; Goliath — soon</span>
-      <span class="theme-chip" style="opacity:0.5;cursor:default;">The Prodigal Son — soon</span>
-      <span class="theme-chip" style="opacity:0.5;cursor:default;">Noah — soon</span>
+      <span class="theme-chip bible-chip" data-story="david">David &amp; Goliath</span>
+      <span class="theme-chip bible-chip" data-story="prodigal">The Prodigal Son</span>
+      <span class="theme-chip bible-chip" data-story="noah">Noah</span>
     </div>
     <div id="bibleStoryBox" class="verse-card" style="text-align:left;display:none;"></div>
   </div>
@@ -121,7 +122,8 @@
     </div>
     <div style="text-align:center;margin-bottom:24px;">
       <span class="theme-chip bedtime-chip" data-story="lamb">The Lamb Who Got Lost</span>
-      <span class="theme-chip" style="opacity:0.5;cursor:default;">More stories coming soon</span>
+      <span class="theme-chip bedtime-chip" data-story="firefly">The Firefly Who Was Afraid of the Dark</span>
+      <span class="theme-chip bedtime-chip" data-story="boat">The Boy Who Rowed Home</span>
     </div>
     <div id="bedtimeStoryBox" class="verse-card" style="text-align:left;display:none;"></div>
   </div>
@@ -145,6 +147,7 @@
         <a href="https://youtube.com/@stillbreathing-media" target="_blank" rel="noopener" style="display:flex;align-items:center;gap:8px;"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 0 0 .5 6.2 31 31 0 0 0 0 12a31 31 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 0 0 2.1-2.1A31 31 0 0 0 24 12a31 31 0 0 0-.5-5.8ZM9.6 15.5V8.5l6.3 3.5-6.3 3.5Z"/></svg> YouTube</a>
         <a href="https://www.tiktok.com/@stillbreathimed" target="_blank" rel="noopener" style="display:flex;align-items:center;gap:8px;"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M16.6 5.8a4.3 4.3 0 0 1-3.1-1.3 4.3 4.3 0 0 1-1.2-2.9h-3v13.4a2.6 2.6 0 1 1-1.8-2.5V9.4a5.9 5.9 0 1 0 5 5.8V9.1a7.3 7.3 0 0 0 4.1 1.3V7.1a4.3 4.3 0 0 1-.03-1.3Z"/></svg> TikTok</a>
         <a href="https://x.com/StillBreathiMed" target="_blank" rel="noopener" style="display:flex;align-items:center;gap:8px;"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M18.9 2H22l-7.6 8.7L23.3 22h-6.9l-5.4-7-6.2 7H1.7l8.2-9.3L1 2h7.1l4.9 6.4L18.9 2Zm-1.2 18h1.9L7.4 4h-2l12.3 16Z"/></svg> X</a>
+        <a href="https://whatsapp.com/channel/0029Vb8vGeH4CrfjfmcAk53d" target="_blank" rel="noopener" style="display:flex;align-items:center;gap:8px;"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.5 14.4c-.3-.1-1.7-.9-2-1-.3-.1-.5-.1-.7.1-.2.3-.8 1-.9 1.1-.2.2-.3.2-.6.1-.3-.1-1.2-.5-2.3-1.5-.9-.8-1.4-1.7-1.6-2-.2-.3 0-.5.1-.6.1-.1.3-.3.4-.5.1-.1.2-.3.3-.4.1-.2 0-.4 0-.5C10 9 9.6 8 9.4 7.6c-.2-.4-.4-.4-.6-.4h-.5c-.2 0-.5.1-.7.3-.2.3-.9 1-.9 2.3 0 1.3 1 2.6 1.1 2.8.1.2 2 3 4.8 4.3.7.3 1.2.5 1.6.6.7.2 1.3.2 1.8.1.5-.1 1.7-.7 2-1.4.2-.7.2-1.2.2-1.3-.1-.1-.2-.2-.5-.3ZM12 2a10 10 0 0 0-8.5 15.2L2 22l4.9-1.5A10 10 0 1 0 12 2Zm0 18.2c-1.6 0-3.1-.4-4.4-1.2l-.3-.2-3 .9.9-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Z"/></svg> WhatsApp Channel</a>
         <a href="privacy.html">Privacy Policy</a>
       </div>
     </div>
@@ -159,6 +162,7 @@
   document.getElementById('votdTheme').textContent = "Today's theme: " + theme;
   document.getElementById('votdText').textContent = '"' + verse.text + '"';
   document.getElementById('votdRef').textContent = verse.ref;
+  document.getElementById('votdShareBtn').dataset.shareText = '"' + verse.text + '" — ' + verse.ref;
 
   document.getElementById('verseSearchBtn').addEventListener('click', doLookup);
   document.getElementById('verseQuery').addEventListener('keydown', e => { if(e.key === 'Enter') doLookup(); });
@@ -196,6 +200,18 @@
     joseph: {
       title: "Joseph and His Brothers",
       body: "Joseph was his father's favorite son, and his brothers hated him for it. He also had dreams that seemed to say he would one day rule over them, and he told those dreams out loud without much wisdom. His brothers' anger grew until one day, they sold him as a slave to traders heading to Egypt, and told their father a wild animal had killed him. In Egypt, Joseph served faithfully even when life was unfair to him — falsely accused, forgotten in prison, overlooked for years. But God was with him the whole time. Eventually, Joseph rose to become the second most powerful man in Egypt, in charge of preparing the nation for a coming famine. Years later, his own brothers came to Egypt begging for food, not knowing the powerful official in front of them was the brother they'd betrayed. Joseph recognized them, and when the moment came to reveal himself, he did not seek revenge. He said, \"You meant to harm me, but God meant it for good.\" This story is about staying faithful through unfair seasons, and about forgiveness being stronger than the wrong done to you."
+    },
+    david: {
+      title: "David and Goliath",
+      body: "The army of Israel was afraid. Every day, a giant soldier named Goliath came out and dared anyone to fight him. He was so tall and strong that no one had the courage to try. Then a young shepherd boy named David came to bring food to his brothers, who were soldiers in that army. David heard the giant's taunts and asked a simple question: who is this man, that he thinks he can insult the army of the living God? The king offered David his own armor, but it was too heavy and unfamiliar. David chose instead what he already knew — his sling, and five smooth stones from a stream. He walked out to face Goliath with no armor and no sword, and he said something bold: \"You come to me with a sword and a spear, but I come to you in the name of the Lord.\" He threw one stone. It struck Goliath in the forehead, and the giant fell. The whole army that had been afraid for weeks watched a shepherd boy do what none of them dared to try. This story is for anyone facing something that looks too big — the size of the problem was never the point. Who you carry with you into the fight is."
+    },
+    prodigal: {
+      title: "The Prodigal Son",
+      body: "A man had two sons. The younger one asked for his share of the inheritance early — as if his father were already dead to him — and left home to spend it all on a wild, reckless life far away. When the money ran out, so did his friends. A famine came, and he ended up so poor and so hungry that he took a job feeding pigs, and even envied what the pigs were eating. Sitting there, starving, he finally came to his senses. He decided to go home, not expecting to be welcomed as a son again, only hoping his father might let him work as a servant. But while he was still far down the road, his father saw him coming and ran to him — before a single apology had been spoken, before any explanation was given. The father wrapped his arms around his son and called for a celebration: \"This son of mine was dead, and is alive again. He was lost, and is found.\" This story is for anyone who thinks they've wandered too far to be welcomed home. The running father in this story never once stopped watching the road."
+    },
+    noah: {
+      title: "Noah and the Flood",
+      body: "In a time when the world had grown deeply corrupt and violent, one man remained faithful: Noah. God told Noah that a great flood was coming, and instructed him to build a massive boat — an ark — big enough to carry his family and two of every kind of animal. Noah obeyed, even though there was no sign of rain, even though it took years to build, even though people around him surely thought he was foolish. When the ark was finished, the rain came, and it did not stop for forty days and forty nights. Everything outside the ark was covered by water. But inside, Noah's family and the animals were safe, carried through the storm by the very obedience that once looked strange to everyone watching. When the waters finally went down, Noah saw a rainbow in the sky — God's promise that He would never destroy the earth with a flood again. This story is about doing the right thing even when nobody around you understands why, and trusting that God's timing is real even during the years that feel like nothing is happening yet."
     }
   };
 
@@ -213,6 +229,14 @@
     lamb: {
       title: "The Lamb Who Got Lost",
       body: "Once there was a little lamb named Suma who loved to explore. One evening, while the rest of the flock rested near the shepherd, Suma wandered off to look at a pretty flower just past the hill. By the time she looked up, she couldn't see the other sheep anywhere. The sky was getting dark, and Suma felt scared and very small. She sat down and did the only thing she could think of — she called out. Not long after, she heard footsteps. It was the shepherd. He had counted his sheep, noticed one was missing, and come looking right away. He didn't scold her. He simply knelt down, picked her up gently, and carried her home on his shoulders, humming softly the whole way back. Suma fell asleep to the sound of his steady footsteps, safe and warm. And that's how it always is — even when we wander, even when we feel lost in the dark, someone is always coming to carry us home. Close your eyes now, little one. You are safe, and you are loved, and morning is already on its way."
+    },
+    firefly: {
+      title: "The Firefly Who Was Afraid of the Dark",
+      body: "There once was a tiny firefly named Kito who was afraid of the dark — which was a strange thing, because Kito's whole body was made to glow. Every night, when the sun went down, Kito would hide inside a leaf, shaking, waiting for morning. One night, an old cricket noticed Kito trembling and asked what was wrong. \"I'm scared of the dark,\" Kito whispered. The cricket smiled gently. \"Little one,\" he said, \"look down at yourself. You were made to carry your own light with you, into every dark place you'll ever go. You were never meant to wait for the dark to end. You were made to shine inside it.\" Kito looked down and saw a small, steady glow, right there in his own belly, the whole time. Slowly, carefully, Kito came out of the leaf. The glow was small, but it was enough to see the next branch, and then the next. Other fireflies saw Kito's light and came to fly alongside. Soon the whole night sky was dotted with tiny lights, all made braver by one small firefly who decided to shine instead of hide. You have a light in you too, little one. Rest now, and let it glow quietly while you sleep."
+    },
+    boat: {
+      title: "The Boy Who Rowed Home",
+      body: "A boy named Tendo went fishing with his father one afternoon, further out on the lake than they usually went. A sudden fog rolled in, thick and gray, and Tendo couldn't see the shore anymore in any direction. He felt his chest go tight with fear. \"Papa, which way is home?\" he asked. His father didn't answer right away. Instead, he was quiet, listening. Then he said, \"Do you hear that? Listen for the bell.\" Far off, faint but steady, Tendo heard it — the small bell that rang from the dock near their house, the one his mother rang every evening to call them home. They couldn't see the shore, but they didn't need to. They rowed toward the sound, a little at a time, trusting it even when the fog didn't clear. Slowly, the bell grew louder, until finally the dock appeared out of the mist, and his mother stood there smiling, still ringing the bell just in case. Some nights feel foggy, little one — you can't always see where you're going. But you can still listen for the sound of home, and keep rowing toward it, one small pull at a time. You'll get there. Sleep well now."
     }
   };
 
