@@ -47,9 +47,10 @@
     min-height: 92vh;
     display:flex; align-items:center;
     background:
-      radial-gradient(ellipse 60% 70% at 78% 30%, rgba(232,163,61,0.16), transparent 60%),
-      radial-gradient(ellipse 50% 50% at 20% 90%, rgba(181,80,46,0.14), transparent 60%),
-      var(--black);
+      linear-gradient(90deg, rgba(20,16,13,0.97) 0%, rgba(20,16,13,0.75) 42%, rgba(20,16,13,0.25) 75%, rgba(20,16,13,0.05) 100%),
+      url('hero-sunset-road.jpg');
+    background-size: cover;
+    background-position: center 35%;
     border-bottom: 1px solid var(--line);
   }
   .hero-inner{ max-width: 640px; padding: 100px 0 90px; }

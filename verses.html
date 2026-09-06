@@ -96,6 +96,36 @@
   </div>
 </section>
 
+<section style="border-bottom:1px solid var(--line);">
+  <div class="wrap">
+    <div class="section-head" style="text-align:center;">
+      <h2>Bible Stories</h2>
+      <p>Which story do you want to read today?</p>
+    </div>
+    <div style="text-align:center;margin-bottom:24px;">
+      <span class="theme-chip bible-chip" data-story="cain">Cain &amp; Abel</span>
+      <span class="theme-chip bible-chip" data-story="joseph">Joseph &amp; His Brothers</span>
+      <span class="theme-chip" style="opacity:0.5;cursor:default;">David &amp; Goliath — soon</span>
+      <span class="theme-chip" style="opacity:0.5;cursor:default;">The Prodigal Son — soon</span>
+      <span class="theme-chip" style="opacity:0.5;cursor:default;">Noah — soon</span>
+    </div>
+    <div id="bibleStoryBox" class="verse-card" style="text-align:left;display:none;"></div>
+  </div>
+</section>
+
+<section style="border-bottom:1px solid var(--line);">
+  <div class="wrap">
+    <div class="section-head" style="text-align:center;">
+      <h2>Bedtime Stories for Little Ones</h2>
+      <p>Struggling to help your child fall asleep tonight? Here's one for them.</p>
+    </div>
+    <div style="text-align:center;margin-bottom:24px;">
+      <span class="theme-chip bedtime-chip" data-story="lamb">The Lamb Who Got Lost</span>
+      <span class="theme-chip" style="opacity:0.5;cursor:default;">More stories coming soon</span>
+    </div>
+    <div id="bedtimeStoryBox" class="verse-card" style="text-align:left;display:none;"></div>
+  </div>
+</section>
 <footer>
   <div class="wrap foot-inner">
     <div class="foot-brand">
@@ -112,9 +142,9 @@
       </div>
       <div class="foot-col">
         <h4>Elsewhere</h4>
-        <a href="https://youtube.com/@stillbreathing-media" target="_blank" rel="noopener">YouTube</a>
-        <a href="https://www.tiktok.com/@stillbreathimed" target="_blank" rel="noopener">TikTok</a>
-        <a href="https://x.com/StillBreathiMed" target="_blank" rel="noopener">X (Twitter)</a>
+        <a href="https://youtube.com/@stillbreathing-media" target="_blank" rel="noopener" style="display:flex;align-items:center;gap:8px;"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 0 0 .5 6.2 31 31 0 0 0 0 12a31 31 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 0 0 2.1-2.1A31 31 0 0 0 24 12a31 31 0 0 0-.5-5.8ZM9.6 15.5V8.5l6.3 3.5-6.3 3.5Z"/></svg> YouTube</a>
+        <a href="https://www.tiktok.com/@stillbreathimed" target="_blank" rel="noopener" style="display:flex;align-items:center;gap:8px;"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M16.6 5.8a4.3 4.3 0 0 1-3.1-1.3 4.3 4.3 0 0 1-1.2-2.9h-3v13.4a2.6 2.6 0 1 1-1.8-2.5V9.4a5.9 5.9 0 1 0 5 5.8V9.1a7.3 7.3 0 0 0 4.1 1.3V7.1a4.3 4.3 0 0 1-.03-1.3Z"/></svg> TikTok</a>
+        <a href="https://x.com/StillBreathiMed" target="_blank" rel="noopener" style="display:flex;align-items:center;gap:8px;"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M18.9 2H22l-7.6 8.7L23.3 22h-6.9l-5.4-7-6.2 7H1.7l8.2-9.3L1 2h7.1l4.9 6.4L18.9 2Zm-1.2 18h1.9L7.4 4h-2l12.3 16Z"/></svg> X</a>
         <a href="privacy.html">Privacy Policy</a>
       </div>
     </div>
@@ -146,15 +176,53 @@
     }
   }
 
-  document.querySelectorAll('.theme-chip').forEach(chip => {
+  document.querySelectorAll('.theme-chip[data-theme]').forEach(chip => {
     chip.addEventListener('click', () => {
-      document.querySelectorAll('.theme-chip').forEach(c => c.classList.remove('active'));
+      document.querySelectorAll('.theme-chip[data-theme]').forEach(c => c.classList.remove('active'));
       chip.classList.add('active');
       const t = chip.dataset.theme;
       const pool = SB_VERSES.filter(v => v.tags.includes(t));
       const v = pool[Math.floor(Math.random()*pool.length)];
       document.getElementById('lookupResult').innerHTML =
         '<div class="verse-card"><div class="theme">' + t.toUpperCase() + '</div><div class="text">"' + v.text + '"</div><div class="ref">' + v.ref + '</div></div>';
+    });
+  });
+
+  const BIBLE_STORIES = {
+    cain: {
+      title: "Cain and Abel",
+      body: "Adam and Eve had two sons, Cain and Abel. Cain worked the land. Abel took care of sheep. One day, both brothers brought a gift to God. Abel gave his best. Cain did not. God was pleased with Abel's gift, but not with Cain's. Cain became angry. God warned him kindly: \"Sin is waiting at your door. It wants to control you. But you can still choose to do what is right.\" Cain did not listen. He took his brother out to a field, and he killed him. God asked Cain, \"Where is your brother?\" Cain lied and said, \"I don't know.\" But God already knew what had happened. He punished Cain, but He also protected him from being killed by others. This story shows how one small choice — jealousy left unchecked, a word left unspoken in honesty — can grow into something much bigger. God always gives us a chance to choose right before it's too late."
+    },
+    joseph: {
+      title: "Joseph and His Brothers",
+      body: "Joseph was his father's favorite son, and his brothers hated him for it. He also had dreams that seemed to say he would one day rule over them, and he told those dreams out loud without much wisdom. His brothers' anger grew until one day, they sold him as a slave to traders heading to Egypt, and told their father a wild animal had killed him. In Egypt, Joseph served faithfully even when life was unfair to him — falsely accused, forgotten in prison, overlooked for years. But God was with him the whole time. Eventually, Joseph rose to become the second most powerful man in Egypt, in charge of preparing the nation for a coming famine. Years later, his own brothers came to Egypt begging for food, not knowing the powerful official in front of them was the brother they'd betrayed. Joseph recognized them, and when the moment came to reveal himself, he did not seek revenge. He said, \"You meant to harm me, but God meant it for good.\" This story is about staying faithful through unfair seasons, and about forgiveness being stronger than the wrong done to you."
+    }
+  };
+
+  document.querySelectorAll('.bible-chip').forEach(chip => {
+    chip.addEventListener('click', () => {
+      const story = BIBLE_STORIES[chip.dataset.story];
+      const box = document.getElementById('bibleStoryBox');
+      box.style.display = 'block';
+      box.innerHTML = '<h3 style="font-family:\'Lora\',serif;color:var(--gold);margin-bottom:14px;">' + story.title + '</h3><p style="color:#EDE3D3;line-height:1.8;">' + story.body + '</p>';
+      box.scrollIntoView({behavior:'smooth', block:'center'});
+    });
+  });
+
+  const BEDTIME_STORIES = {
+    lamb: {
+      title: "The Lamb Who Got Lost",
+      body: "Once there was a little lamb named Suma who loved to explore. One evening, while the rest of the flock rested near the shepherd, Suma wandered off to look at a pretty flower just past the hill. By the time she looked up, she couldn't see the other sheep anywhere. The sky was getting dark, and Suma felt scared and very small. She sat down and did the only thing she could think of — she called out. Not long after, she heard footsteps. It was the shepherd. He had counted his sheep, noticed one was missing, and come looking right away. He didn't scold her. He simply knelt down, picked her up gently, and carried her home on his shoulders, humming softly the whole way back. Suma fell asleep to the sound of his steady footsteps, safe and warm. And that's how it always is — even when we wander, even when we feel lost in the dark, someone is always coming to carry us home. Close your eyes now, little one. You are safe, and you are loved, and morning is already on its way."
+    }
+  };
+
+  document.querySelectorAll('.bedtime-chip').forEach(chip => {
+    chip.addEventListener('click', () => {
+      const story = BEDTIME_STORIES[chip.dataset.story];
+      const box = document.getElementById('bedtimeStoryBox');
+      box.style.display = 'block';
+      box.innerHTML = '<h3 style="font-family:\'Lora\',serif;color:var(--gold);margin-bottom:14px;">' + story.title + '</h3><p style="color:#EDE3D3;line-height:1.8;">' + story.body + '</p>';
+      box.scrollIntoView({behavior:'smooth', block:'center'});
     });
   });
 </script>
