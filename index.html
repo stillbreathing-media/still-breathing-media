@@ -8,7 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;1,400&family=Work+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="styles.css?v=2">
 </head>
 <body>
 
@@ -62,7 +62,7 @@
     <div style="font-family:'Lora',serif;font-style:italic;font-size:1.2rem;color:#EDE3D3;line-height:1.6;" id="votdText"></div>
     <div style="color:var(--gold);margin-top:14px;font-family:'Lora',serif;" id="votdRef"></div>
     <div>
-      <button data-share data-share-title="Today's verse from Still Breathing" id="votdShareBtn" style="margin-top:16px;background:none;border:1px solid var(--line);color:var(--muted);padding:8px 16px;border-radius:20px;font-size:0.82rem;cursor:pointer;">&#8599; Share today's verse</button>
+      <button data-share data-share-title="Today's verse from Still Breathing" id="votdShareBtn" style="margin-top:16px;background:none;border:1px solid var(--line);color:var(--muted);padding:8px 16px;border-radius:20px;font-size:0.82rem;cursor:pointer;"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align:-2px;margin-right:4px;"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.6" y1="10.6" x2="15.4" y2="6.4"/><line x1="8.6" y1="13.4" x2="15.4" y2="17.6"/></svg>Share today's verse</button>
     </div>
     <a href="verses.html" class="btn btn-ghost" style="margin-top:14px;display:inline-block;">Look up a verse</a>
   </div>
@@ -219,8 +219,8 @@
   <div class="wrap foot-bottom">© 2026 Still Breathing Media. You are never alone. God is still here.</div>
 </footer>
 
-<script src="verses.js"></script>
-<script src="search.js"></script>
+<script src="verses.js?v=2"></script>
+<script src="search.js?v=4"></script>
 <script>
   const votd = sbVerseOfDay();
   document.getElementById('votdTheme').textContent = "Today's theme: " + votd.theme;

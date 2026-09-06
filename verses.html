@@ -6,7 +6,7 @@
 <title>Verses | Still Breathing Media</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;1,400&family=Work+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="styles.css?v=2">
 <style>
   .verse-card{ border:1px solid var(--line); padding:36px 30px; text-align:center; max-width:640px; margin:0 auto; }
   .verse-card .theme{ color:var(--gold); font-size:0.85rem; letter-spacing:0.08em; text-transform:uppercase; margin-bottom:16px; }
@@ -67,7 +67,7 @@
       <div class="theme" id="votdTheme">Loading...</div>
       <div class="text" id="votdText"></div>
       <div class="ref" id="votdRef"></div>
-      <button data-share data-share-title="Today's verse from Still Breathing" id="votdShareBtn" style="margin-top:16px;background:none;border:1px solid var(--line);color:var(--muted);padding:8px 16px;border-radius:20px;font-size:0.82rem;cursor:pointer;">&#8599; Share today's verse</button>
+      <button data-share data-share-title="Today's verse from Still Breathing" id="votdShareBtn" style="margin-top:16px;background:none;border:1px solid var(--line);color:var(--muted);padding:8px 16px;border-radius:20px;font-size:0.82rem;cursor:pointer;"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align:-2px;margin-right:4px;"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.6" y1="10.6" x2="15.4" y2="6.4"/><line x1="8.6" y1="13.4" x2="15.4" y2="17.6"/></svg>Share today's verse</button>
     </div>
   </div>
 </section>
@@ -79,6 +79,18 @@
       <p>Type a reference like "John 3:16" or "Psalm 23".</p>
     </div>
     <input type="text" id="verseQuery" placeholder="e.g. Romans 8:28">
+    <select id="verseLang" style="width:100%;background:rgba(242,233,221,0.05);border:1px solid var(--line);color:var(--cream);padding:14px 16px;border-radius:2px;font-size:0.95rem;margin-bottom:14px;">
+      <option value="en">English (default)</option>
+      <option value="fr">French</option>
+      <option value="es">Spanish</option>
+      <option value="pt">Portuguese</option>
+      <option value="sw">Swahili</option>
+      <option value="ar">Arabic</option>
+      <option value="hi">Hindi</option>
+      <option value="zh">Chinese</option>
+      <option value="lg">Luganda</option>
+      <option value="nyn">Runyankore</option>
+    </select>
     <div style="text-align:center;">
       <button class="btn btn-solid" id="verseSearchBtn" type="button">Search</button>
     </div>
@@ -102,6 +114,17 @@
     <div class="section-head" style="text-align:center;">
       <h2>Bible Stories</h2>
       <p>Which story do you want to read today?</p>
+    </div>
+    <div style="text-align:center;margin-bottom:16px;">
+      <select id="storyLang" style="background:rgba(242,233,221,0.05);border:1px solid var(--line);color:var(--cream);padding:10px 14px;border-radius:2px;font-size:0.9rem;">
+        <option value="en">English (default)</option>
+        <option value="fr">French</option>
+        <option value="es">Spanish</option>
+        <option value="pt">Portuguese</option>
+        <option value="sw">Swahili</option>
+        <option value="lg">Luganda</option>
+        <option value="nyn">Runyankore</option>
+      </select>
     </div>
     <div style="text-align:center;margin-bottom:24px;">
       <span class="theme-chip bible-chip" data-story="cain">Cain &amp; Abel</span>
@@ -155,8 +178,8 @@
   <div class="wrap foot-bottom">© 2026 Still Breathing Media. You are never alone. God is still here.</div>
 </footer>
 
-<script src="search.js"></script>
-<script src="verses.js"></script>
+<script src="search.js?v=4"></script>
+<script src="verses.js?v=2"></script>
 <script>
   const { verse, theme } = sbVerseOfDay();
   document.getElementById('votdTheme').textContent = "Today's theme: " + theme;
@@ -167,17 +190,31 @@
   document.getElementById('verseSearchBtn').addEventListener('click', doLookup);
   document.getElementById('verseQuery').addEventListener('keydown', e => { if(e.key === 'Enter') doLookup(); });
 
+  const LANG_NAMES = { en:'English', fr:'French', es:'Spanish', pt:'Portuguese', sw:'Swahili', ar:'Arabic', hi:'Hindi', zh:'Chinese', lg:'Luganda', nyn:'Runyankore' };
+
   async function doLookup(){
     const q = document.getElementById('verseQuery').value;
+    const lang = document.getElementById('verseLang').value;
     const box = document.getElementById('lookupResult');
     if(!q.trim()){ box.innerHTML = '<div style="color:var(--muted);">Type a reference first.</div>'; return; }
-    box.innerHTML = '<div style="color:var(--muted);">Searching...</div>';
-    const result = await sbLookupVerse(q);
-    if(result){
-      box.innerHTML = '<div class="verse-card"><div class="text">"' + result.text + '"</div><div class="ref">' + result.ref + '</div></div>';
-    } else {
-      box.innerHTML = '<div style="color:var(--muted);">Couldn\'t find that one — try a format like "John 3:16".</div>';
+
+    if(lang === 'en'){
+      box.innerHTML = '<div style="color:var(--muted);">Searching...</div>';
+      const result = await sbLookupVerse(q);
+      if(result){
+        box.innerHTML = '<div class="verse-card"><div class="text">"' + result.text + '"</div><div class="ref">' + result.ref + '</div></div>';
+      } else {
+        box.innerHTML = '<div style="color:var(--muted);">Couldn\'t find that one — try a format like "John 3:16".</div>';
+      }
+      return;
     }
+
+    // Non-English: we don't have a verified translation source built in yet,
+    // so we send you to a trusted place to read it rather than guess.
+    const langName = LANG_NAMES[lang] || lang;
+    const query = encodeURIComponent(q + ' Bible verse in ' + langName);
+    box.innerHTML = '<div class="verse-card"><div style="color:var(--muted);font-size:0.9rem;">We don\'t have a verified ' + langName + ' translation built in yet — opening a trusted search for it instead, so you get an accurate one.</div></div>';
+    window.open('https://www.google.com/search?q=' + query, '_blank');
   }
 
   document.querySelectorAll('.theme-chip[data-theme]').forEach(chip => {
@@ -194,58 +231,72 @@
 
   const BIBLE_STORIES = {
     cain: {
-      title: "Cain and Abel",
-      body: "Adam and Eve had two sons, Cain and Abel. Cain worked the land. Abel took care of sheep. One day, both brothers brought a gift to God. Abel gave his best. Cain did not. God was pleased with Abel's gift, but not with Cain's. Cain became angry. God warned him kindly: \"Sin is waiting at your door. It wants to control you. But you can still choose to do what is right.\" Cain did not listen. He took his brother out to a field, and he killed him. God asked Cain, \"Where is your brother?\" Cain lied and said, \"I don't know.\" But God already knew what had happened. He punished Cain, but He also protected him from being killed by others. This story shows how one small choice — jealousy left unchecked, a word left unspoken in honesty — can grow into something much bigger. God always gives us a chance to choose right before it's too late."
+      en: { title: "Cain and Abel", body: "Adam and Eve had two sons, Cain and Abel. Cain worked the land. Abel took care of sheep. One day, both brothers brought a gift to God. Abel gave his best. Cain did not. God was pleased with Abel's gift, but not with Cain's. Cain became angry. God warned him kindly: \"Sin is waiting at your door. It wants to control you. But you can still choose to do what is right.\" Cain did not listen. He took his brother out to a field, and he killed him. God asked Cain, \"Where is your brother?\" Cain lied and said, \"I don't know.\" But God already knew what had happened. He punished Cain, but He also protected him from being killed by others. This story shows how one small choice — jealousy left unchecked, a word left unspoken in honesty — can grow into something much bigger. God always gives us a chance to choose right before it's too late." },
+      fr: { title: "Caïn et Abel", body: "Adam et Ève eurent deux fils, Caïn et Abel. Caïn cultivait la terre. Abel s'occupait des moutons. Un jour, les deux frères apportèrent une offrande à Dieu. Abel donna le meilleur. Caïn ne le fit pas. Dieu fut content de l'offrande d'Abel, mais pas de celle de Caïn. Caïn devint furieux. Dieu l'avertit avec bonté : « Le péché attend à ta porte. Il veut te contrôler. Mais tu peux encore choisir de bien agir. » Caïn n'écouta pas. Il emmena son frère dans un champ et le tua. Dieu demanda à Caïn : « Où est ton frère ? » Caïn mentit : « Je ne sais pas. » Mais Dieu savait déjà. Il punit Caïn, mais Il le protégea aussi contre ceux qui voudraient le tuer. Cette histoire montre comment un petit choix — une jalousie non maîtrisée, un mot d'honnêteté non dit — peut devenir bien plus grand. Dieu nous donne toujours une chance de bien choisir avant qu'il ne soit trop tard." },
+      es: { title: "Caín y Abel", body: "Adán y Eva tuvieron dos hijos, Caín y Abel. Caín trabajaba la tierra. Abel cuidaba ovejas. Un día, los dos hermanos trajeron una ofrenda a Dios. Abel dio lo mejor que tenía. Caín no lo hizo. Dios se agradó de la ofrenda de Abel, pero no de la de Caín. Caín se enojó. Dios le advirtió con bondad: «El pecado está esperando en tu puerta. Quiere controlarte. Pero todavía puedes elegir hacer lo correcto.» Caín no escuchó. Llevó a su hermano a un campo y lo mató. Dios le preguntó: «¿Dónde está tu hermano?» Caín mintió: «No lo sé.» Pero Dios ya sabía lo que había pasado. Castigó a Caín, pero también lo protegió para que otros no lo mataran. Esta historia muestra cómo una pequeña decisión — los celos sin control, una palabra honesta no dicha — puede crecer hasta convertirse en algo mucho más grande. Dios siempre nos da la oportunidad de elegir bien antes de que sea demasiado tarde." },
+      pt: { title: "Caim e Abel", body: "Adão e Eva tiveram dois filhos, Caim e Abel. Caim trabalhava a terra. Abel cuidava de ovelhas. Um dia, os dois irmãos trouxeram uma oferta a Deus. Abel deu o seu melhor. Caim não. Deus ficou contente com a oferta de Abel, mas não com a de Caim. Caim ficou com raiva. Deus o avisou com bondade: \"O pecado está à sua porta. Ele quer te controlar. Mas você ainda pode escolher fazer o certo.\" Caim não ouviu. Levou o irmão a um campo e o matou. Deus perguntou: \"Onde está seu irmão?\" Caim mentiu: \"Não sei.\" Mas Deus já sabia o que tinha acontecido. Ele puniu Caim, mas também o protegeu para que outros não o matassem. Esta história mostra como uma pequena escolha — o ciúme não controlado, uma palavra honesta não dita — pode crescer e se tornar algo muito maior. Deus sempre nos dá a chance de escolher certo antes que seja tarde demais." },
+      sw: { title: "Kaini na Abeli", body: "Adamu na Hawa walikuwa na wana wawili, Kaini na Abeli. Kaini alilima ardhi. Abeli alichunga kondoo. Siku moja, ndugu wote wawili walileta zawadi kwa Mungu. Abeli alitoa bora yake. Kaini hakufanya hivyo. Mungu alifurahia zawadi ya Abeli, lakini si ya Kaini. Kaini alikasirika. Mungu alimwonya kwa wema: \"Dhambi inangoja mlangoni pako. Inataka kukutawala. Lakini bado unaweza kuchagua kufanya lililo sahihi.\" Kaini hakusikiliza. Alimchukua ndugu yake shambani, akamuua. Mungu akamuuliza Kaini, \"Yuko wapi ndugu yako?\" Kaini alidanganya, \"Sijui.\" Lakini Mungu alikwisha jua yaliyotokea. Alimwadhibu Kaini, lakini pia alimlinda asije akauawa na wengine. Hadithi hii inaonyesha jinsi uamuzi mdogo — wivu usiozuiliwa, neno la ukweli lisilosemwa — unavyoweza kukua na kuwa kitu kikubwa zaidi. Mungu daima anatupa nafasi ya kuchagua sahihi kabla haijachelewa." }
     },
     joseph: {
-      title: "Joseph and His Brothers",
-      body: "Joseph was his father's favorite son, and his brothers hated him for it. He also had dreams that seemed to say he would one day rule over them, and he told those dreams out loud without much wisdom. His brothers' anger grew until one day, they sold him as a slave to traders heading to Egypt, and told their father a wild animal had killed him. In Egypt, Joseph served faithfully even when life was unfair to him — falsely accused, forgotten in prison, overlooked for years. But God was with him the whole time. Eventually, Joseph rose to become the second most powerful man in Egypt, in charge of preparing the nation for a coming famine. Years later, his own brothers came to Egypt begging for food, not knowing the powerful official in front of them was the brother they'd betrayed. Joseph recognized them, and when the moment came to reveal himself, he did not seek revenge. He said, \"You meant to harm me, but God meant it for good.\" This story is about staying faithful through unfair seasons, and about forgiveness being stronger than the wrong done to you."
+      en: { title: "Joseph and His Brothers", body: "Joseph was his father's favorite son, and his brothers hated him for it. He also had dreams that seemed to say he would one day rule over them, and he told those dreams out loud without much wisdom. His brothers' anger grew until one day, they sold him as a slave to traders heading to Egypt, and told their father a wild animal had killed him. In Egypt, Joseph served faithfully even when life was unfair to him — falsely accused, forgotten in prison, overlooked for years. But God was with him the whole time. Eventually, Joseph rose to become the second most powerful man in Egypt, in charge of preparing the nation for a coming famine. Years later, his own brothers came to Egypt begging for food, not knowing the powerful official in front of them was the brother they'd betrayed. Joseph recognized them, and when the moment came to reveal himself, he did not seek revenge. He said, \"You meant to harm me, but God meant it for good.\" This story is about staying faithful through unfair seasons, and about forgiveness being stronger than the wrong done to you." }
     },
     david: {
-      title: "David and Goliath",
-      body: "The army of Israel was afraid. Every day, a giant soldier named Goliath came out and dared anyone to fight him. He was so tall and strong that no one had the courage to try. Then a young shepherd boy named David came to bring food to his brothers, who were soldiers in that army. David heard the giant's taunts and asked a simple question: who is this man, that he thinks he can insult the army of the living God? The king offered David his own armor, but it was too heavy and unfamiliar. David chose instead what he already knew — his sling, and five smooth stones from a stream. He walked out to face Goliath with no armor and no sword, and he said something bold: \"You come to me with a sword and a spear, but I come to you in the name of the Lord.\" He threw one stone. It struck Goliath in the forehead, and the giant fell. The whole army that had been afraid for weeks watched a shepherd boy do what none of them dared to try. This story is for anyone facing something that looks too big — the size of the problem was never the point. Who you carry with you into the fight is."
+      en: { title: "David and Goliath", body: "The army of Israel was afraid. Every day, a giant soldier named Goliath came out and dared anyone to fight him. He was so tall and strong that no one had the courage to try. Then a young shepherd boy named David came to bring food to his brothers, who were soldiers in that army. David heard the giant's taunts and asked a simple question: who is this man, that he thinks he can insult the army of the living God? The king offered David his own armor, but it was too heavy and unfamiliar. David chose instead what he already knew — his sling, and five smooth stones from a stream. He walked out to face Goliath with no armor and no sword, and he said something bold: \"You come to me with a sword and a spear, but I come to you in the name of the Lord.\" He threw one stone. It struck Goliath in the forehead, and the giant fell. The whole army that had been afraid for weeks watched a shepherd boy do what none of them dared to try. This story is for anyone facing something that looks too big — the size of the problem was never the point. Who you carry with you into the fight is." }
     },
     prodigal: {
-      title: "The Prodigal Son",
-      body: "A man had two sons. The younger one asked for his share of the inheritance early — as if his father were already dead to him — and left home to spend it all on a wild, reckless life far away. When the money ran out, so did his friends. A famine came, and he ended up so poor and so hungry that he took a job feeding pigs, and even envied what the pigs were eating. Sitting there, starving, he finally came to his senses. He decided to go home, not expecting to be welcomed as a son again, only hoping his father might let him work as a servant. But while he was still far down the road, his father saw him coming and ran to him — before a single apology had been spoken, before any explanation was given. The father wrapped his arms around his son and called for a celebration: \"This son of mine was dead, and is alive again. He was lost, and is found.\" This story is for anyone who thinks they've wandered too far to be welcomed home. The running father in this story never once stopped watching the road."
+      en: { title: "The Prodigal Son", body: "A man had two sons. The younger one asked for his share of the inheritance early — as if his father were already dead to him — and left home to spend it all on a wild, reckless life far away. When the money ran out, so did his friends. A famine came, and he ended up so poor and so hungry that he took a job feeding pigs, and even envied what the pigs were eating. Sitting there, starving, he finally came to his senses. He decided to go home, not expecting to be welcomed as a son again, only hoping his father might let him work as a servant. But while he was still far down the road, his father saw him coming and ran to him — before a single apology had been spoken, before any explanation was given. The father wrapped his arms around his son and called for a celebration: \"This son of mine was dead, and is alive again. He was lost, and is found.\" This story is for anyone who thinks they've wandered too far to be welcomed home. The running father in this story never once stopped watching the road." }
     },
     noah: {
-      title: "Noah and the Flood",
-      body: "In a time when the world had grown deeply corrupt and violent, one man remained faithful: Noah. God told Noah that a great flood was coming, and instructed him to build a massive boat — an ark — big enough to carry his family and two of every kind of animal. Noah obeyed, even though there was no sign of rain, even though it took years to build, even though people around him surely thought he was foolish. When the ark was finished, the rain came, and it did not stop for forty days and forty nights. Everything outside the ark was covered by water. But inside, Noah's family and the animals were safe, carried through the storm by the very obedience that once looked strange to everyone watching. When the waters finally went down, Noah saw a rainbow in the sky — God's promise that He would never destroy the earth with a flood again. This story is about doing the right thing even when nobody around you understands why, and trusting that God's timing is real even during the years that feel like nothing is happening yet."
+      en: { title: "Noah and the Flood", body: "In a time when the world had grown deeply corrupt and violent, one man remained faithful: Noah. God told Noah that a great flood was coming, and instructed him to build a massive boat — an ark — big enough to carry his family and two of every kind of animal. Noah obeyed, even though there was no sign of rain, even though it took years to build, even though people around him surely thought he was foolish. When the ark was finished, the rain came, and it did not stop for forty days and forty nights. Everything outside the ark was covered by water. But inside, Noah's family and the animals were safe, carried through the storm by the very obedience that once looked strange to everyone watching. When the waters finally went down, Noah saw a rainbow in the sky — God's promise that He would never destroy the earth with a flood again. This story is about doing the right thing even when nobody around you understands why, and trusting that God's timing is real even during the years that feel like nothing is happening yet." }
     }
   };
 
   document.querySelectorAll('.bible-chip').forEach(chip => {
     chip.addEventListener('click', () => {
-      const story = BIBLE_STORIES[chip.dataset.story];
+      const lang = document.getElementById('storyLang').value;
+      const storyData = BIBLE_STORIES[chip.dataset.story];
+      const story = storyData[lang] || storyData['en'];
+      const isFallback = !storyData[lang];
       const box = document.getElementById('bibleStoryBox');
       box.style.display = 'block';
-      box.innerHTML = '<h3 style="font-family:\'Lora\',serif;color:var(--gold);margin-bottom:14px;">' + story.title + '</h3><p style="color:#EDE3D3;line-height:1.8;">' + story.body + '</p>';
+      let note = '';
+      if(isFallback && lang !== 'en'){
+        note = '<div style="color:var(--muted);font-size:0.85rem;margin-bottom:12px;">We don\'t have a verified translation in this language for this story yet, so here it is in English.</div>';
+      }
+      box.innerHTML = '<h3 style="font-family:\'Lora\',serif;color:var(--gold);margin-bottom:14px;">' + story.title + '</h3>' + note + '<p style="color:#EDE3D3;line-height:1.8;">' + story.body + '</p>';
       box.scrollIntoView({behavior:'smooth', block:'center'});
     });
   });
 
   const BEDTIME_STORIES = {
     lamb: {
-      title: "The Lamb Who Got Lost",
-      body: "Once there was a little lamb named Suma who loved to explore. One evening, while the rest of the flock rested near the shepherd, Suma wandered off to look at a pretty flower just past the hill. By the time she looked up, she couldn't see the other sheep anywhere. The sky was getting dark, and Suma felt scared and very small. She sat down and did the only thing she could think of — she called out. Not long after, she heard footsteps. It was the shepherd. He had counted his sheep, noticed one was missing, and come looking right away. He didn't scold her. He simply knelt down, picked her up gently, and carried her home on his shoulders, humming softly the whole way back. Suma fell asleep to the sound of his steady footsteps, safe and warm. And that's how it always is — even when we wander, even when we feel lost in the dark, someone is always coming to carry us home. Close your eyes now, little one. You are safe, and you are loved, and morning is already on its way."
+      en: { title: "The Lamb Who Got Lost", body: "Once there was a little lamb named Suma who loved to explore. One evening, while the rest of the flock rested near the shepherd, Suma wandered off to look at a pretty flower just past the hill. By the time she looked up, she couldn't see the other sheep anywhere. The sky was getting dark, and Suma felt scared and very small. She sat down and did the only thing she could think of — she called out. Not long after, she heard footsteps. It was the shepherd. He had counted his sheep, noticed one was missing, and come looking right away. He didn't scold her. He simply knelt down, picked her up gently, and carried her home on his shoulders, humming softly the whole way back. Suma fell asleep to the sound of his steady footsteps, safe and warm. And that's how it always is — even when we wander, even when we feel lost in the dark, someone is always coming to carry us home. Close your eyes now, little one. You are safe, and you are loved, and morning is already on its way." },
+      fr: { title: "L'agneau qui s'est perdu", body: "Il était une fois un petit agneau nommé Suma qui aimait explorer. Un soir, pendant que le reste du troupeau se reposait près du berger, Suma s'éloigna pour regarder une jolie fleur juste après la colline. Quand elle releva la tête, elle ne voyait plus aucun mouton nulle part. Le ciel s'assombrissait, et Suma se sentit effrayée et toute petite. Elle s'assit et fit la seule chose à laquelle elle pouvait penser — elle appela. Peu après, elle entendit des pas. C'était le berger. Il avait compté ses moutons, remarqué qu'il en manquait un, et était venu la chercher tout de suite. Il ne la gronda pas. Il s'agenouilla simplement, la souleva doucement, et la porta jusqu'à la maison sur ses épaules, fredonnant doucement tout le chemin. Suma s'endormit au son de ses pas réguliers, en sécurité et au chaud. Et c'est toujours ainsi — même quand nous nous égarons, même quand nous nous sentons perdus dans le noir, quelqu'un vient toujours nous porter à la maison. Ferme les yeux maintenant, petit. Tu es en sécurité, tu es aimé, et le matin arrive déjà." },
+      es: { title: "El corderito que se perdió", body: "Había una vez un corderito llamado Suma a quien le encantaba explorar. Una tarde, mientras el resto del rebaño descansaba cerca del pastor, Suma se alejó para mirar una flor bonita justo detrás de la colina. Cuando levantó la vista, no podía ver a las otras ovejas por ningún lado. El cielo se oscurecía, y Suma se sintió asustada y muy pequeña. Se sentó e hizo lo único que se le ocurrió — llamó en voz alta. Poco después, escuchó pasos. Era el pastor. Había contado sus ovejas, notó que faltaba una, y vino a buscarla de inmediato. No la regañó. Simplemente se arrodilló, la levantó con suavidad, y la llevó a casa sobre sus hombros, tarareando suavemente todo el camino. Suma se durmió al sonido de sus pasos firmes, segura y calentita. Y así es siempre — incluso cuando nos alejamos, incluso cuando nos sentimos perdidos en la oscuridad, alguien siempre viene a llevarnos a casa. Cierra los ojos ahora, pequeño. Estás a salvo, eres amado, y la mañana ya viene en camino." },
+      pt: { title: "A ovelhinha que se perdeu", body: "Era uma vez uma ovelhinha chamada Suma que adorava explorar. Uma noite, enquanto o resto do rebanho descansava perto do pastor, Suma se afastou para olhar uma flor bonita logo depois da colina. Quando ela olhou para cima, não conseguia ver as outras ovelhas em lugar nenhum. O céu estava escurecendo, e Suma se sentiu com medo e muito pequena. Ela sentou e fez a única coisa que conseguiu pensar — chamou por ajuda. Pouco depois, ouviu passos. Era o pastor. Ele tinha contado suas ovelhas, notou que faltava uma, e veio procurá-la imediatamente. Ele não a repreendeu. Apenas se ajoelhou, pegou nela com carinho, e a carregou para casa em seus ombros, cantarolando suavemente o caminho todo. Suma adormeceu ao som de seus passos firmes, segura e aquecida. E é sempre assim — mesmo quando nos afastamos, mesmo quando nos sentimos perdidos no escuro, alguém sempre vem nos carregar para casa. Feche os olhos agora, pequeno. Você está seguro, é amado, e a manhã já está a caminho." },
+      sw: { title: "Mwana-kondoo Aliyepotea", body: "Hapo zamani kulikuwa na mwana-kondoo mdogo aitwaye Suma ambaye alipenda kuchunguza. Jioni moja, wakati kundi lingine likipumzika karibu na mchungaji, Suma alitangatanga kutazama ua zuri nyuma ya kilima. Alipoinua kichwa, hakuweza kuona kondoo wengine popote. Anga lilikuwa linaingia giza, na Suma alihisi hofu na mdogo sana. Aliketi na kufanya jambo pekee alilojua — aliita kwa sauti. Muda mfupi baadaye, alisikia hatua za miguu. Alikuwa mchungaji. Alikuwa amehesabu kondoo wake, akagundua mmoja amepotea, na akaja kumtafuta mara moja. Hakumkemea. Alipiga tu magoti, akamchukua kwa upole, na kumbeba nyumbani begani mwake, akiimba kwa sauti ya chini njia yote. Suma alilala kwa sauti ya hatua zake thabiti, akiwa salama na joto. Na ndivyo ilivyo daima — hata tunapopotea, hata tunapohisi tumepotea gizani, mtu daima anakuja kutubeba nyumbani. Funga macho yako sasa, mdogo wangu. Uko salama, unapendwa, na asubuhi tayari inakuja." }
     },
     firefly: {
-      title: "The Firefly Who Was Afraid of the Dark",
-      body: "There once was a tiny firefly named Kito who was afraid of the dark — which was a strange thing, because Kito's whole body was made to glow. Every night, when the sun went down, Kito would hide inside a leaf, shaking, waiting for morning. One night, an old cricket noticed Kito trembling and asked what was wrong. \"I'm scared of the dark,\" Kito whispered. The cricket smiled gently. \"Little one,\" he said, \"look down at yourself. You were made to carry your own light with you, into every dark place you'll ever go. You were never meant to wait for the dark to end. You were made to shine inside it.\" Kito looked down and saw a small, steady glow, right there in his own belly, the whole time. Slowly, carefully, Kito came out of the leaf. The glow was small, but it was enough to see the next branch, and then the next. Other fireflies saw Kito's light and came to fly alongside. Soon the whole night sky was dotted with tiny lights, all made braver by one small firefly who decided to shine instead of hide. You have a light in you too, little one. Rest now, and let it glow quietly while you sleep."
+      en: { title: "The Firefly Who Was Afraid of the Dark", body: "There once was a tiny firefly named Kito who was afraid of the dark — which was a strange thing, because Kito's whole body was made to glow. Every night, when the sun went down, Kito would hide inside a leaf, shaking, waiting for morning. One night, an old cricket noticed Kito trembling and asked what was wrong. \"I'm scared of the dark,\" Kito whispered. The cricket smiled gently. \"Little one,\" he said, \"look down at yourself. You were made to carry your own light with you, into every dark place you'll ever go. You were never meant to wait for the dark to end. You were made to shine inside it.\" Kito looked down and saw a small, steady glow, right there in his own belly, the whole time. Slowly, carefully, Kito came out of the leaf. The glow was small, but it was enough to see the next branch, and then the next. Other fireflies saw Kito's light and came to fly alongside. Soon the whole night sky was dotted with tiny lights, all made braver by one small firefly who decided to shine instead of hide. You have a light in you too, little one. Rest now, and let it glow quietly while you sleep." }
     },
     boat: {
-      title: "The Boy Who Rowed Home",
-      body: "A boy named Tendo went fishing with his father one afternoon, further out on the lake than they usually went. A sudden fog rolled in, thick and gray, and Tendo couldn't see the shore anymore in any direction. He felt his chest go tight with fear. \"Papa, which way is home?\" he asked. His father didn't answer right away. Instead, he was quiet, listening. Then he said, \"Do you hear that? Listen for the bell.\" Far off, faint but steady, Tendo heard it — the small bell that rang from the dock near their house, the one his mother rang every evening to call them home. They couldn't see the shore, but they didn't need to. They rowed toward the sound, a little at a time, trusting it even when the fog didn't clear. Slowly, the bell grew louder, until finally the dock appeared out of the mist, and his mother stood there smiling, still ringing the bell just in case. Some nights feel foggy, little one — you can't always see where you're going. But you can still listen for the sound of home, and keep rowing toward it, one small pull at a time. You'll get there. Sleep well now."
+      en: { title: "The Boy Who Rowed Home", body: "A boy named Tendo went fishing with his father one afternoon, further out on the lake than they usually went. A sudden fog rolled in, thick and gray, and Tendo couldn't see the shore anymore in any direction. He felt his chest go tight with fear. \"Papa, which way is home?\" he asked. His father didn't answer right away. Instead, he was quiet, listening. Then he said, \"Do you hear that? Listen for the bell.\" Far off, faint but steady, Tendo heard it — the small bell that rang from the dock near their house, the one his mother rang every evening to call them home. They couldn't see the shore, but they didn't need to. They rowed toward the sound, a little at a time, trusting it even when the fog didn't clear. Slowly, the bell grew louder, until finally the dock appeared out of the mist, and his mother stood there smiling, still ringing the bell just in case. Some nights feel foggy, little one — you can't always see where you're going. But you can still listen for the sound of home, and keep rowing toward it, one small pull at a time. You'll get there. Sleep well now." }
     }
   };
 
   document.querySelectorAll('.bedtime-chip').forEach(chip => {
     chip.addEventListener('click', () => {
-      const story = BEDTIME_STORIES[chip.dataset.story];
+      const lang = document.getElementById('storyLang').value;
+      const storyData = BEDTIME_STORIES[chip.dataset.story];
+      const story = storyData[lang] || storyData['en'];
+      const isFallback = !storyData[lang];
       const box = document.getElementById('bedtimeStoryBox');
       box.style.display = 'block';
-      box.innerHTML = '<h3 style="font-family:\'Lora\',serif;color:var(--gold);margin-bottom:14px;">' + story.title + '</h3><p style="color:#EDE3D3;line-height:1.8;">' + story.body + '</p>';
+      let note = '';
+      if(isFallback && lang !== 'en'){
+        note = '<div style="color:var(--muted);font-size:0.85rem;margin-bottom:12px;">We don\'t have a verified translation in this language for this story yet, so here it is in English.</div>';
+      }
+      box.innerHTML = '<h3 style="font-family:\'Lora\',serif;color:var(--gold);margin-bottom:14px;">' + story.title + '</h3>' + note + '<p style="color:#EDE3D3;line-height:1.8;">' + story.body + '</p>';
       box.scrollIntoView({behavior:'smooth', block:'center'});
     });
   });
