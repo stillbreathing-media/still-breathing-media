@@ -80,18 +80,6 @@
       <p>Type a reference like "John 3:16" or "Psalm 23".</p>
     </div>
     <input type="text" id="verseQuery" placeholder="e.g. Romans 8:28">
-    <select id="verseLang" style="width:100%;background:rgba(242,233,221,0.05);border:1px solid var(--line);color:var(--cream);padding:14px 16px;border-radius:2px;font-size:0.95rem;margin-bottom:14px;">
-      <option value="en">English (default)</option>
-      <option value="fr">French</option>
-      <option value="es">Spanish</option>
-      <option value="pt">Portuguese</option>
-      <option value="sw">Swahili</option>
-      <option value="ar">Arabic</option>
-      <option value="hi">Hindi</option>
-      <option value="zh">Chinese</option>
-      <option value="lg">Luganda</option>
-      <option value="nyn">Runyankore</option>
-    </select>
     <div style="text-align:center;">
       <button class="btn btn-solid" id="verseSearchBtn" type="button">Search</button>
     </div>
@@ -123,8 +111,6 @@
         <option value="es">Spanish</option>
         <option value="pt">Portuguese</option>
         <option value="sw">Swahili</option>
-        <option value="lg">Luganda</option>
-        <option value="nyn">Runyankore</option>
       </select>
     </div>
     <div style="text-align:center;margin-bottom:24px;">
@@ -191,31 +177,17 @@
   document.getElementById('verseSearchBtn').addEventListener('click', doLookup);
   document.getElementById('verseQuery').addEventListener('keydown', e => { if(e.key === 'Enter') doLookup(); });
 
-  const LANG_NAMES = { en:'English', fr:'French', es:'Spanish', pt:'Portuguese', sw:'Swahili', ar:'Arabic', hi:'Hindi', zh:'Chinese', lg:'Luganda', nyn:'Runyankore' };
-
   async function doLookup(){
     const q = document.getElementById('verseQuery').value;
-    const lang = document.getElementById('verseLang').value;
     const box = document.getElementById('lookupResult');
     if(!q.trim()){ box.innerHTML = '<div style="color:var(--muted);">Type a reference first.</div>'; return; }
-
-    if(lang === 'en'){
-      box.innerHTML = '<div style="color:var(--muted);">Searching...</div>';
-      const result = await sbLookupVerse(q);
-      if(result){
-        box.innerHTML = '<div class="verse-card"><div class="text">"' + result.text + '"</div><div class="ref">' + result.ref + '</div></div>';
-      } else {
-        box.innerHTML = '<div style="color:var(--muted);">Couldn\'t find that one — try a format like "John 3:16".</div>';
-      }
-      return;
+    box.innerHTML = '<div style="color:var(--muted);">Searching...</div>';
+    const result = await sbLookupVerse(q);
+    if(result){
+      box.innerHTML = '<div class="verse-card"><div class="text">"' + result.text + '"</div><div class="ref">' + result.ref + '</div></div>';
+    } else {
+      box.innerHTML = '<div style="color:var(--muted);">Couldn\'t find that one — try a format like "John 3:16".</div>';
     }
-
-    // Non-English: we don't have a verified translation source built in yet,
-    // so we send you to a trusted place to read it rather than guess.
-    const langName = LANG_NAMES[lang] || lang;
-    const query = encodeURIComponent(q + ' Bible verse in ' + langName);
-    box.innerHTML = '<div class="verse-card"><div style="color:var(--muted);font-size:0.9rem;">We don\'t have a verified ' + langName + ' translation built in yet — opening a trusted search for it instead, so you get an accurate one.</div></div>';
-    window.open('https://www.google.com/search?q=' + query, '_blank');
   }
 
   document.querySelectorAll('.theme-chip[data-theme]').forEach(chip => {
