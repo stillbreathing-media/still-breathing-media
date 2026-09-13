@@ -7,7 +7,7 @@ const SB_SEARCH_INDEX = [
   { title: "Breathing Room", desc: "Our upcoming program — testimonies, prayer, hope", url: "breathing-room.html" },
   { title: "Still Breathing: My Story", desc: "True story by Sumeyi Rogers — read Chapter 1 free", url: "still-breathing-my-story.html" },
   { title: "She Stopped Waiting for Permission", desc: "Book — read Chapter 1 free", url: "stopped-waiting-for-permission.html" },
-  { title: "She Raised Him Alone", desc: "Book — coming soon", url: "books.html" },
+  { title: "She Raised Him Alone", desc: "Book — read Chapter 1 free", url: "raised-him-alone.html" },
   { title: "He Came Back With A Wife", desc: "Book — coming soon", url: "books.html" },
   { title: "He Saw The Worst of You", desc: "Book — coming soon", url: "books.html" },
   { title: "Nobody Knew", desc: "Book — coming soon", url: "books.html" },
